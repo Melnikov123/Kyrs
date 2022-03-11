@@ -1,0 +1,20 @@
+﻿<Window x:Class="Funerial.Otdel_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Funerial"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        mc:Ignorable="d"
+        Title="Отделы" Height="450" Width="800">
+    <Grid>
+        <ListBox x:Name="Otdel_ListBox" HorizontalAlignment="Left" Height="338" Margin="41,59,0,0" VerticalAlignment="Top" Width="148" SelectionChanged="Otdel_ListBox_SelectionChanged"/>
+        <TextBox x:Name="TextBox_Search" HorizontalAlignment="Left" Height="47" Margin="41,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" TextChanged="TextBox_TextChanged" materialDesign:HintAssist.Hint="Поиск по названию" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" />
+        <Button x:Name="Special_Button" Content="Посмотреть специальности" HorizontalAlignment="Left" Margin="542,365,0,0" VerticalAlignment="Top" Width="220" Click="Special_Button_Click"/>
+        <Button x:Name="New_Otdel" Content="Добавить отдел" HorizontalAlignment="Left" Margin="611,22,0,0" VerticalAlignment="Top" Width="151" Click="Button_Click"/>
+        <Button x:Name="Button_Student" Content="Абитуриенты" HorizontalAlignment="Left" Margin="470,22,0,0" VerticalAlignment="Top" Width="125" RenderTransformOrigin="0.05,0.7" Click="Button_Student_Click"/>
+        <TextBlock x:Name="TextBlock_Information" HorizontalAlignment="Left" Margin="274,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="278" Width="453"/>
+        <Button x:Name="Button_Special" Content="Добавить специальность" HorizontalAlignment="Left" Margin="247,21,0,0" VerticalAlignment="Top" Width="203" Click="Button_Special_Click"/>
+
+    </Grid>
+</Window>

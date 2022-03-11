@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Ekz1Model1" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Okras" Type="nvarchar" MaxLength="20" />
+          <Property Name="Id_Poroda" Type="int" />
+        </EntityType>
+        <EntityType Name="Poroda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Cat_ToTable">
+          <End Role="Poroda" Type="Self.Poroda" Multiplicity="0..1" />
+          <End Role="Cat" Type="Self.Cat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poroda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cat">
+              <PropertyRef Name="Id_Poroda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Ekz1Model1Container">
+          <EntitySet Name="Cat" EntityType="Self.Cat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poroda" EntityType="Self.Poroda" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cat_ToTable" Association="Self.FK_Cat_ToTable">
+            <End Role="Poroda" EntitySet="Poroda" />
+            <End Role="Cat" EntitySet="Cat" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ekz1Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Okras" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Poroda" Relationship="Self.FK_Cat_ToTable" FromRole="Cat" ToRole="Poroda" />
+        </EntityType>
+        <EntityType Name="Poroda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cat" Relationship="Self.FK_Cat_ToTable" FromRole="Poroda" ToRole="Cat" />
+        </EntityType>
+        <Association Name="FK_Cat_ToTable">
+          <End Role="Poroda" Type="Self.Poroda" Multiplicity="0..1" />
+          <End Role="Cat" Type="Self.Cat" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Ekz1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cat" EntityType="Self.Cat" />
+          <EntitySet Name="Poroda" EntityType="Self.Poroda" />
+          <AssociationSet Name="FK_Cat_ToTable" Association="Self.FK_Cat_ToTable">
+            <End Role="Poroda" EntitySet="Poroda" />
+            <End Role="Cat" EntitySet="Cat" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Ekz1Model1Container" CdmEntityContainer="Ekz1Entities1">
+          <EntitySetMapping Name="Cat">
+            <EntityTypeMapping TypeName="Ekz1Model1.Cat">
+              <MappingFragment StoreEntitySet="Cat">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Okras" ColumnName="Okras" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poroda">
+            <EntityTypeMapping TypeName="Ekz1Model1.Poroda">
+              <MappingFragment StoreEntitySet="Poroda">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Cat_ToTable" TypeName="Ekz1Model1.FK_Cat_ToTable" StoreEntitySet="Cat">
+            <EndProperty Name="Poroda">
+              <ScalarProperty Name="Id" ColumnName="Id_Poroda" />
+            </EndProperty>
+            <EndProperty Name="Cat">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Id_Poroda" />
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

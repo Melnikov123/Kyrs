@@ -1,0 +1,23 @@
+﻿<Window x:Class="Funerial.Authorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Funerial"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="450" Width="491.429">
+    <Grid Margin="0,0,2,4" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="74*"/>
+            <ColumnDefinition Width="74*"/>
+            <ColumnDefinition Width="313*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="entrance" Content="Войти" HorizontalAlignment="Left" Margin="0,318,0,0" VerticalAlignment="Top" Width="118" Click="entrance_Click" Height="29" Grid.Column="2"/>
+        <TextBox x:Name="Login_Box" HorizontalAlignment="Left" Height="23" Margin="0,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.136,0.445" Grid.Column="2"/>
+        <TextBox x:Name="Password_Box" HorizontalAlignment="Left" Height="23" Margin="0,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.51,0.57" Grid.Column="2"/>
+        <Button Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="165" Click="Button_Click" Height="34" Grid.ColumnSpan="3"/>
+        <Label Content="Введите логин или email" HorizontalAlignment="Left" Margin="44,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.061,0.639" FontSize="18" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label Content="Введите пароль" HorizontalAlignment="Left" Margin="56,240,0,0" VerticalAlignment="Top" FontSize="18" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label Content="Войдите в акаунт" HorizontalAlignment="Left" Margin="59,76,0,0" VerticalAlignment="Top" FontSize="20" Grid.Column="1" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>

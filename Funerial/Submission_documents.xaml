@@ -1,0 +1,32 @@
+﻿<Window x:Class="Funerial.Submission_documents"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local="clr-namespace:Funerial"
+        mc:Ignorable="d"
+        Title="Подача документов" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="Grid_documents" HorizontalAlignment="Left" CanUserAddRows="False" Height="210" Margin="0,209,0,0" VerticalAlignment="Top" Width="961" AutoGenerateColumns="False"   Background="White" SelectionChanged="Grid_documents_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Специальность" Binding="{Binding Special.Name}" Width="200"/>
+                <DataGridTextColumn Header="Фамилия Абитуриента" Binding="{Binding Abityrient.Surname}" Width="200"/>
+                <DataGridTextColumn Header="Имя Абитуриента" Binding="{Binding Abityrient.Name}" Width="200"/>
+                <DataGridTextColumn Header="Дата подачи" Binding="{Binding Abityrient.Data_spach, StringFormat=d.M.yyyy}" Width="200"/>
+                
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Delet_Button" Content="Удалить" HorizontalAlignment="Left" Margin="584,147,0,0"  VerticalAlignment="Top" Width="96" />
+        <Button x:Name="Clear_Button" Content="Очистить поля" HorizontalAlignment="Left" Margin="371,103,0,0" VerticalAlignment="Top" Width="139"  />
+        <Button x:Name="Add_Button" Content="Добавить" HorizontalAlignment="Left" Margin="371,147,0,0" VerticalAlignment="Top" Width="98" Click="Add_Button_Click" />
+        <ComboBox x:Name="TextBox_surname" HorizontalAlignment="Left" Margin="54,25,0,0" VerticalAlignment="Top" Width="163" materialDesign:HintAssist.Hint="Выберите фамилию" Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="TextBox_name1_SelectionChanged" />
+        <ComboBox x:Name="TextBox_spec" HorizontalAlignment="Left" Margin="54,78,0,0" VerticalAlignment="Top" Width="163" materialDesign:HintAssist.Hint="Выберите специальность" Style="{StaticResource MaterialDesignComboBox}" />
+        <Button x:Name="New_Abityrients" Content="..." HorizontalAlignment="Left" Margin="264,25,0,0" VerticalAlignment="Top" Width="75" Click="New_Abityrients_Click" />
+        <Button x:Name="Export_Button" Content="Экспорт в эксель" HorizontalAlignment="Left" Margin="525,103,0,0" VerticalAlignment="Top" Width="155" Click="Export_Button_Click"/>
+        <Label x:Name="Label_Sum" Content="Label" HorizontalAlignment="Left" Margin="54,162,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBox_Search" HorizontalAlignment="Left" Height="47" Margin="449,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" TextChanged="TextBox_TextChanged" materialDesign:HintAssist.Hint="Поиск по названию" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" />
+        <Label Content="Кол-во человек подавшие на специальность" HorizontalAlignment="Left" Margin="54,118,0,0" VerticalAlignment="Top" FontSize="14"/>
+    </Grid>
+</Window>

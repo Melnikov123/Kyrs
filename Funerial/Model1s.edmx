@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище maximModel1" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abityrient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="20" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="20" />
+          <Property Name="Data_spach" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Spec" Type="int" />
+          <Property Name="Id_Abityrient" Type="int" />
+        </EntityType>
+        <EntityType Name="Introductory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Otdel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Information" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Special">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Prohod_Bal" Type="nvarchar" MaxLength="20" />
+          <Property Name="Id_Otdel" Type="int" />
+        </EntityType>
+        <EntityType Name="Svaz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Spec" Type="int" />
+          <Property Name="Id_Predmet" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="Role" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Documents_ToTable">
+          <End Role="Special" Type="Self.Special" Multiplicity="0..1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Special">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="Id_Spec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_ToTable_1">
+          <End Role="Abityrient" Type="Self.Abityrient" Multiplicity="0..1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abityrient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="Id_Abityrient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Special_ToTable">
+          <End Role="Otdel" Type="Self.Otdel" Multiplicity="0..1" />
+          <End Role="Special" Type="Self.Special" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otdel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Special">
+              <PropertyRef Name="Id_Otdel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Svaz_ToTable">
+          <End Role="Special" Type="Self.Special" Multiplicity="0..1" />
+          <End Role="Svaz" Type="Self.Svaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Special">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Svaz">
+              <PropertyRef Name="Id_Spec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Svaz_ToTable_1">
+          <End Role="Introductory" Type="Self.Introductory" Multiplicity="0..1" />
+          <End Role="Svaz" Type="Self.Svaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Introductory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Svaz">
+              <PropertyRef Name="Id_Predmet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище maximModel1Container">
+          <EntitySet Name="Abityrient" EntityType="Self.Abityrient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Introductory" EntityType="Self.Introductory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Otdel" EntityType="Self.Otdel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Special" EntityType="Self.Special" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Svaz" EntityType="Self.Svaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Documents_ToTable" Association="Self.FK_Documents_ToTable">
+            <End Role="Special" EntitySet="Special" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_ToTable_1" Association="Self.FK_Documents_ToTable_1">
+            <End Role="Abityrient" EntitySet="Abityrient" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Special_ToTable" Association="Self.FK_Special_ToTable">
+            <End Role="Otdel" EntitySet="Otdel" />
+            <End Role="Special" EntitySet="Special" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Svaz_ToTable" Association="Self.FK_Svaz_ToTable">
+            <End Role="Special" EntitySet="Special" />
+            <End Role="Svaz" EntitySet="Svaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Svaz_ToTable_1" Association="Self.FK_Svaz_ToTable_1">
+            <End Role="Introductory" EntitySet="Introductory" />
+            <End Role="Svaz" EntitySet="Svaz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="maximModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Abityrient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Data_spach" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_Documents_ToTable_1" FromRole="Abityrient" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Spec" Type="Int32" />
+          <Property Name="Id_Abityrient" Type="Int32" />
+          <NavigationProperty Name="Abityrient" Relationship="Self.FK_Documents_ToTable_1" FromRole="Documents" ToRole="Abityrient" />
+          <NavigationProperty Name="Special" Relationship="Self.FK_Documents_ToTable" FromRole="Documents" ToRole="Special" />
+        </EntityType>
+        <EntityType Name="Introductory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Svaz" Relationship="Self.FK_Svaz_ToTable_1" FromRole="Introductory" ToRole="Svaz" />
+        </EntityType>
+        <EntityType Name="Otdel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Special" Relationship="Self.FK_Special_ToTable" FromRole="Otdel" ToRole="Special" />
+        </EntityType>
+        <EntityType Name="Special">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Prohod_Bal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Otdel" Type="Int32" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_Documents_ToTable" FromRole="Special" ToRole="Documents" />
+          <NavigationProperty Name="Otdel" Relationship="Self.FK_Special_ToTable" FromRole="Special" ToRole="Otdel" />
+          <NavigationProperty Name="Svaz" Relationship="Self.FK_Svaz_ToTable" FromRole="Special" ToRole="Svaz" />
+        </EntityType>
+        <EntityType Name="Svaz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Spec" Type="Int32" />
+          <Property Name="Id_Predmet" Type="Int32" />
+          <NavigationProperty Name="Introductory" Relationship="Self.FK_Svaz_ToTable_1" FromRole="Svaz" ToRole="Introductory" />
+          <NavigationProperty Name="Special" Relationship="Self.FK_Svaz_ToTable" FromRole="Svaz" ToRole="Special" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Documents_ToTable_1">
+          <End Role="Abityrient" Type="Self.Abityrient" Multiplicity="0..1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abityrient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="Id_Abityrient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_ToTable">
+          <End Role="Special" Type="Self.Special" Multiplicity="0..1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Special">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="Id_Spec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Svaz_ToTable_1">
+          <End Role="Introductory" Type="Self.Introductory" Multiplicity="0..1" />
+          <End Role="Svaz" Type="Self.Svaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Introductory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Svaz">
+              <PropertyRef Name="Id_Predmet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Special_ToTable">
+          <End Role="Otdel" Type="Self.Otdel" Multiplicity="0..1" />
+          <End Role="Special" Type="Self.Special" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otdel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Special">
+              <PropertyRef Name="Id_Otdel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Svaz_ToTable">
+          <End Role="Special" Type="Self.Special" Multiplicity="0..1" />
+          <End Role="Svaz" Type="Self.Svaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Special">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Svaz">
+              <PropertyRef Name="Id_Spec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="maximEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abityrient" EntityType="Self.Abityrient" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" />
+          <EntitySet Name="Introductory" EntityType="Self.Introductory" />
+          <EntitySet Name="Otdel" EntityType="Self.Otdel" />
+          <EntitySet Name="Special" EntityType="Self.Special" />
+          <EntitySet Name="Svaz" EntityType="Self.Svaz" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Documents_ToTable_1" Association="Self.FK_Documents_ToTable_1">
+            <End Role="Abityrient" EntitySet="Abityrient" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_ToTable" Association="Self.FK_Documents_ToTable">
+            <End Role="Special" EntitySet="Special" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Svaz_ToTable_1" Association="Self.FK_Svaz_ToTable_1">
+            <End Role="Introductory" EntitySet="Introductory" />
+            <End Role="Svaz" EntitySet="Svaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Special_ToTable" Association="Self.FK_Special_ToTable">
+            <End Role="Otdel" EntitySet="Otdel" />
+            <End Role="Special" EntitySet="Special" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Svaz_ToTable" Association="Self.FK_Svaz_ToTable">
+            <End Role="Special" EntitySet="Special" />
+            <End Role="Svaz" EntitySet="Svaz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище maximModel1Container" CdmEntityContainer="maximEntities3">
+          <EntitySetMapping Name="Abityrient">
+            <EntityTypeMapping TypeName="maximModel1.Abityrient">
+              <MappingFragment StoreEntitySet="Abityrient">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Data_spach" ColumnName="Data_spach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="maximModel1.Documents">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Spec" ColumnName="Id_Spec" />
+                <ScalarProperty Name="Id_Abityrient" ColumnName="Id_Abityrient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Introductory">
+            <EntityTypeMapping TypeName="maximModel1.Introductory">
+              <MappingFragment StoreEntitySet="Introductory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otdel">
+            <EntityTypeMapping TypeName="maximModel1.Otdel">
+              <MappingFragment StoreEntitySet="Otdel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Special">
+            <EntityTypeMapping TypeName="maximModel1.Special">
+              <MappingFragment StoreEntitySet="Special">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Prohod_Bal" ColumnName="Prohod_Bal" />
+                <ScalarProperty Name="Id_Otdel" ColumnName="Id_Otdel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Svaz">
+            <EntityTypeMapping TypeName="maximModel1.Svaz">
+              <MappingFragment StoreEntitySet="Svaz">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Spec" ColumnName="Id_Spec" />
+                <ScalarProperty Name="Id_Predmet" ColumnName="Id_Predmet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="maximModel1.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
